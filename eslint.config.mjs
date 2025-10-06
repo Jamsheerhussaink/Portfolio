@@ -19,10 +19,6 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
     ],
-    // This rules object will disable the unescaped entities check
-    rules: {
-      "react/no-unescaped-entities": "off",
-    },
   },
 ];
 

@@ -1,4 +1,8 @@
+// src/components/About.tsx
 import React from 'react';
+
+// You can use an icon library like 'react-icons' for the svgs
+// To install: npm install react-icons
 import { FaLaptopCode, FaBrain, FaDatabase, FaLightbulb } from 'react-icons/fa';
 
 const About = () => {
@@ -12,9 +16,9 @@ const About = () => {
           </h1>
           <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
             Enthusiastic AI developer with hands-on experience in machine learning using
-            Scikit-learn, Pandas, NumPy, and Matplotlib. Proficient in Python and C,
-            with a strong interest in AI, ML, and Computer Vision. Passionate about
-            building projects and eager to apply skills to real-world applications.
+             Scikit-learn, Pandas, NumPy, and Matplotlib. Proficient in Python and C,
+             with a strong interest in AI, ML, and Computer Vision. Passionate about
+              building projects and eager to apply skills to real-world applications
           </p>
         </div>
 
@@ -26,7 +30,7 @@ const About = () => {
             </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               My journey into AI started during my computer science studies, where I was
-              captivated by the potential of machine learning algorithms. Since then, I&apos;ve been
+              captivated by the potential of machine learning algorithms. Since then, I've been
               dedicated to learning and building projects that showcase the power of AI.
             </p>
             <p className="text-gray-700 leading-relaxed">

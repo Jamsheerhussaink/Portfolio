@@ -1,7 +1,7 @@
 export const Hero = () => {
   return (
     // CHANGE IS HERE: Replaced "bg-gray-100" with gradient classes
-    <section id="home" className="bg-gradient-to-br from-gray-50 to-blue-200 min-h-screen flex items-center justify-center">
+    <section id = "home" className="bg-gradient-to-br from-gray-50 to-blue-200 min-h-screen flex items-center justify-center">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-center px-6 py-12 gap-12">
         
         {/* Left Side: Text */}
