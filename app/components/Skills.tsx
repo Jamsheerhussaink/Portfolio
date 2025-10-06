@@ -1,134 +1,84 @@
-// app/components/Skills.tsx
+'use client';
 
 import React from 'react';
+import { FaGithub, FaExternalLinkAlt, FaBrain } from 'react-icons/fa';
 
-// --- Data for Skills ---
-const programmingLanguages = [
-  { name: 'Python', percentage: 90 },
-  { name: 'JavaScript', percentage: 55 },
-  { name: 'R', percentage: 10 },
-  { name: 'SQL', percentage: 55 },
-  { name: 'Java', percentage: 10 },
+interface ProjectType {
+  title: string;
+  description: string;
+  imageUrl: string;
+  tags: string[];
+  codeLink: string;
+  demoLink: string;
+  cornerIcon: React.ReactNode;
+}
+
+const projectsData: ProjectType[] = [
+  {
+    title: 'Anime Recommendation System',
+    description: 'Created a machine learning model to recommend animes based on the genre, rating, and type. The model was trained on a large dataset and provides personalized suggestions.',
+    imageUrl: '/assets/image.jpg',
+    tags: ['Python', 'Scikit-learn', 'Pandas', 'Flask'],
+    codeLink: 'https://github.com/Jamsheerhussaink/Anime-recommendation.git',
+    demoLink: 'https://anime-recommendation-gm08.onrender.com/',
+    cornerIcon: <FaBrain />,
+  },
 ];
 
-const frameworks = [
-  { name: 'TensorFlow', percentage: 10 },
-  { name: 'PyTorch', percentage: 10 },
-  { name: 'Scikit-learn', percentage: 100 },
-  { name: 'Keras', percentage: 15 },
-  { name: 'OpenCV', percentage: 50 },
-];
-
-const webTechnologies = [
-  { name: 'React', percentage: 85 },
-  { name: 'Node.js', percentage: 80 },
-  { name: 'FastAPI', percentage: 25 },
-  { name: 'Flask', percentage: 80 },
-  { name: 'Docker', percentage: 40 },
-];
-
-const tools = [
-  'Jupyter Notebook', 'Git', 'AWS', 'Google Cloud', 'MongoDB', 
-  'PostgreSQL', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 
-  'Streamlit', 'Gradio', 'MLflow', 'Weights & Biases', 'Linux'
-];
-
-const aiDomains = [
-  'Machine Learning', 'Deep Learning', 'Natural Language Processing', 
-  'Computer Vision', 'Data Science', 'Neural Networks', 'Reinforcement Learning', 
-  'MLOps', 'Time Series Analysis', 'Generative AI', 'Large Language Models', 
-  'Transfer Learning'
-];
-// --- End of Data ---
-
-
-// Helper component for the progress bars
-const SkillBar = ({ skill, percentage }: { skill: string; percentage: number }) => (
-  <div className="mb-4">
-    <div className="flex justify-between items-center mb-1">
-      <span className="text-base font-medium text-blue-900">{skill}</span>
-      <span className="text-sm font-medium text-blue-700">{percentage}%</span>
-    </div>
-    <div className="w-full bg-blue-100 rounded-full h-2.5">
-      <div 
-        // CHANGED: Progress bar color
-        className="bg-blue-600 h-2.5 rounded-full" 
-        style={{ width: `${percentage}%` }}
-      ></div>
-    </div>
-  </div>
-);
-
-const Skills = () => {
+const ProjectCard = ({ title, description, imageUrl, tags, codeLink, demoLink, cornerIcon }: ProjectType) => {
   return (
-    <section id="skills" className="bg-white py-20 px-4 sm:px-6 lg:px-24">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+      <div className="relative">
+        <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
+        <div className="absolute top-4 left-4 bg-black bg-opacity-60 text-white p-2 rounded-md text-xl">
+          {cornerIcon}
+        </div>
+      </div>
+      
+      <div className="p-6 flex flex-col">
+        <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
+        <p className="text-gray-600 text-sm mb-4 flex-grow">{description}</p>
+        
+        <div className="flex flex-wrap gap-2 mb-4">
+          {tags.map((tag: string) => <span key={tag} className="bg-gray-200 text-gray-800 text-xs font-semibold px-2.5 py-1 rounded-full">{tag}</span>)}
+        </div>
+        
+        <div className="flex items-center gap-4 mt-auto">
+          <a href={codeLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors">
+            <FaGithub /> Code
+          </a>
+          {demoLink && (
+            <a href={demoLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium bg-gray-900 text-white hover:bg-gray-700 transition-colors">
+              <FaExternalLinkAlt /> Live Demo
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Projects = () => {
+  return (
+    <section id="projects" className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-24">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-gray-900">Skills & Expertise</h2>
+          <h2 className="text-4xl font-extrabold text-gray-900">Featured Projects</h2>
           <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-            A comprehensive overview of my technical skills and areas of expertise in AI and software development.
+            A showcase of my AI and machine learning projects that demonstrate my skills and passion for innovation.
           </p>
         </div>
-
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-          {/* Programming Languages */}
-          {/* CHANGED: Card background color */}
-          <div className="bg-blue-50 p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold mb-4 text-blue-900">Programming Languages</h3>
-            {programmingLanguages.map(skill => (
-              <SkillBar key={skill.name} skill={skill.name} percentage={skill.percentage} />
+        
+        <div className="flex justify-center">
+          <div className="w-full max-w-xl">
+            {projectsData.map((project) => (
+              <ProjectCard key={project.title} {...project} />
             ))}
           </div>
-
-          {/* AI/ML Frameworks */}
-          <div className="bg-blue-50 p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold mb-4 text-blue-900">AI/ML Frameworks</h3>
-            {frameworks.map(skill => (
-              <SkillBar key={skill.name} skill={skill.name} percentage={skill.percentage} />
-            ))}
-          </div>
-
-          {/* Web Technologies */}
-          <div className="bg-blue-50 p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold mb-4 text-blue-900">Web Technologies</h3>
-            {webTechnologies.map(skill => (
-              <SkillBar key={skill.name} skill={skill.name} percentage={skill.percentage} />
-            ))}
-          </div>
-        </div>
-
-        {/* Tags Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Tools & Technologies */}
-            <div className="bg-blue-50 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold mb-4 text-blue-900">Tools & Technologies</h3>
-                <div className="flex flex-wrap gap-2">
-                    {tools.map(tool => (
-                        // CHANGED: Tag background and text color
-                        <span key={tool} className="bg-blue-200 text-blue-800 text-sm font-medium px-3 py-1 rounded-md">
-                            {tool}
-                        </span>
-                    ))}
-                </div>
-            </div>
-
-            {/* AI Domains */}
-            <div className="bg-blue-50 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold mb-4 text-blue-900">AI Domains</h3>
-                <div className="flex flex-wrap gap-2">
-                    {aiDomains.map(domain => (
-                        <span key={domain} className="bg-blue-200 text-blue-800 text-sm font-medium px-3 py-1 rounded-md">
-                            {domain}
-                        </span>
-                    ))}
-                </div>
-            </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default Skills;
+export default Projects;
