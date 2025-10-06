@@ -22,7 +22,7 @@ const projectsData: ProjectType[] = [
     imageUrl: '/assets/image.jpg',
     tags: ['Python', 'Scikit-learn', 'Pandas', 'Flask'],
     codeLink: 'https://github.com/Jamsheerhussaink/Anime-recommendation.git',
-    demoLink: 'https://anime-recommendation-gm08.onrender.com/',
+    demoLink: 'https://anime-front-sigma.vercel.app/',
     cornerIcon: <FaBrain />,
   },
 ];
